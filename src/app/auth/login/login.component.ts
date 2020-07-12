@@ -1,37 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { SignupRequest } from '../../shared/signup';
+import { LoginRequest } from '../../shared/login';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class SignupComponent implements OnInit {
+export class LoginComponent implements OnInit {
 
-  signupRequest: SignupRequest;
-  signupForm: FormGroup;
+  loginRequest: LoginRequest;
+  loginForm: FormGroup;
 
   formErrors = {
     'username': '',
-    'email': '',
     'password': ''
   };
 
   validationMessages = {
     'username': {
       'required':      'Username is required.',
-      'maxlength':     'Username cannot be more than 40 characters long.'
-    },
-    'email': {
-      'required':      'Email is required.',
-      'email':         'Email not in valid format.',
-      'maxlength':     'Email cannot be more than 40 characters long.'
     },
     'password': {
       'required':      'Password is required.',
-      'maxlength':     'Password cannot be more than 40 characters long.'
     },
   };
 
@@ -39,33 +31,33 @@ export class SignupComponent implements OnInit {
     this.createForm();
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {
+  }
 
   createForm() {
-    this.signupForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.maxLength(40)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.maxLength(40)]],
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
     });
 
-    this.signupForm.valueChanges
+    this.loginForm.valueChanges
     .subscribe( () => this.onValueChanged());
   }
 
   onSubmit() {
-    if(this.signupForm.valid) {
-      this.signupRequest = this.signupForm.value;
-      this.authService.signup(this.signupRequest).subscribe(
-        response => console.log(response)
-      );
+    if(this.loginForm.valid) {
+      this.loginRequest = this.loginForm.value;
+      this.authService.login(this.loginRequest).subscribe(data => {
+        console.log('Login successful');
+      });
     } else {
       this.onValueChanged(true);
     }
   }
 
   onValueChanged(isSend?:boolean) {
-    if (!this.signupForm) { return; }
-    const form = this.signupForm;
+    if (!this.loginForm) { return; }
+    const form = this.loginForm;
     for (const field in this.formErrors) {
       if (this.formErrors.hasOwnProperty(field)) {
         // clear previous error message (if any)
