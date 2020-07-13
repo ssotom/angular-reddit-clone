@@ -10,8 +10,8 @@ import { HeaderComponent } from './header/header.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 
-import { BaseURL } from './services/baseURL';
-import { ErrorResponseService } from './services/error.response.service';
+import { BaseURL } from './services/base-URL';
+import { ErrorResponseService } from './services/error-response.service';
 import { AuthService } from './services/auth.service';
 
 
