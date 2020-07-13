@@ -12,6 +12,8 @@ export class SignupComponent implements OnInit {
 
   signupRequest: SignupRequest;
   signupForm: FormGroup;
+  message: string;
+  errorMessage: string;
 
   formErrors = {
     'username': '',
@@ -31,6 +33,7 @@ export class SignupComponent implements OnInit {
     },
     'password': {
       'required':      'Password is required.',
+      'minlength':     'Password must be equals or more than 6 characters long.',
       'maxlength':     'Password cannot be more than 40 characters long.'
     },
   };
@@ -45,7 +48,7 @@ export class SignupComponent implements OnInit {
     this.signupForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.maxLength(40)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.maxLength(40)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]],
     });
 
     this.signupForm.valueChanges
@@ -56,8 +59,14 @@ export class SignupComponent implements OnInit {
     if(this.signupForm.valid) {
       this.signupRequest = this.signupForm.value;
       this.authService.signup(this.signupRequest).subscribe(
-        response => console.log(response)
-      );
+        response => {
+          this.signupForm.reset();
+          this.message = response.message;
+        },
+        error => {
+          this.message = null;
+          this.errorMessage = error;
+        });
     } else {
       this.onValueChanged(true);
     }

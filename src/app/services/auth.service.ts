@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, catchError  } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { BaseURL } from '../services/baseURL';
+import { ErrorResponseService } from '../services/error.response.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { SignupRequest } from '../shared/signup';
 import { LoginRequest, LoginResponse } from '../shared/login';
@@ -15,12 +16,13 @@ export class AuthService {
   private BASEURL: string;
 
   constructor(private baseURL: BaseURL, private http: HttpClient,
-    private localStorage: LocalStorageService) {
+    private localStorage: LocalStorageService, private errorResponseService: ErrorResponseService) {
     this.BASEURL = baseURL.getBaseURL() + 'auth';
   }
 
   signup(signupRequest: SignupRequest): Observable<any> {
-    return this.http.post(this.BASEURL + '/signup', signupRequest);
+    return this.http.post(this.BASEURL + '/signup', signupRequest)
+    .pipe(catchError(this.errorResponseService.handleError));
   }
 
   login(loginRequest: LoginRequest): Observable<boolean> {
@@ -33,7 +35,8 @@ export class AuthService {
           this.localStorage.store('expiresAt', response.expiresAt);
           return true;
         })
-      );
+      )
+      .pipe(catchError(this.errorResponseService.handleError));
   }
 
 }

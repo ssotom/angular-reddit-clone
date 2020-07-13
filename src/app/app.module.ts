@@ -8,10 +8,13 @@ import {NgxWebstorageModule} from 'ngx-webstorage';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { LoginComponent } from './auth/login/login.component';
 
 import { BaseURL } from './services/baseURL';
+import { ErrorResponseService } from './services/error.response.service';
 import { AuthService } from './services/auth.service';
-import { LoginComponent } from './auth/login/login.component';
+
+
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import { LoginComponent } from './auth/login/login.component';
   ],
   providers: [
     BaseURL,
+    ErrorResponseService,
     AuthService
   ],
   bootstrap: [AppComponent]
