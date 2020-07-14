@@ -5,18 +5,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {NgxWebstorageModule} from 'ngx-webstorage';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
+import { PostTitleComponent } from './home/post-title/post-title.component';
+import { SideBarComponent } from './home/side-bar/side-bar.component';
+import { SubredditSideBarComponent } from './home/subreddit-side-bar/subreddit-side-bar.component';
+import { VoteButtonComponent } from './home/vote-button/vote-button.component';
 
 import { TokenInterceptor } from './services/token-interceptor';
 import { BaseURL } from './services/base-URL';
 import { ErrorResponseService } from './services/error-response.service';
 import { AuthService } from './services/auth.service';
 import { PostService } from './services/post.service';
-
+import { SubredditService } from './services/subreddit.service';
 
 @NgModule({
   declarations: [
@@ -24,14 +29,19 @@ import { PostService } from './services/post.service';
     HeaderComponent,
     SignupComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    PostTitleComponent,
+    SideBarComponent,
+    SubredditSideBarComponent,
+    VoteButtonComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxWebstorageModule.forRoot()
+    NgxWebstorageModule.forRoot(),
+    FontAwesomeModule
   ],
   providers: [
     {
@@ -42,7 +52,8 @@ import { PostService } from './services/post.service';
     BaseURL,
     ErrorResponseService,
     AuthService,
-    PostService
+    PostService,
+    SubredditService
   ],
   bootstrap: [AppComponent]
 })
