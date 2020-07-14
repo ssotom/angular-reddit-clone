@@ -16,18 +16,21 @@ export class TokenInterceptor implements HttpInterceptor {
     constructor(public authService: AuthService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (this.authService.getJwtToken()) {
-            this.addToken(request, this.authService.getJwtToken());
+        if (request.url.indexOf('refresh') !== -1 || request.url.indexOf('login') !== -1) {
+            return next.handle(request);
         }
+        const jwtToken = this.authService.getJwtToken();
 
-        return next.handle(request).pipe(catchError(error => {
-            if (error instanceof HttpErrorResponse
-                && error.status === 403) {
-                return this.handleAuthErrors(request, next);
-            } else {
-                return throwError(error);
-            }
-        }));
+        if (jwtToken) {
+            return next.handle(this.addToken(request, jwtToken)).pipe(catchError(error => {
+                if (error instanceof HttpErrorResponse && error.status === 403) {
+                    return this.handleAuthErrors(request, next);
+                } else {
+                    return throwError(error);
+                }
+            }));
+        }
+        return next.handle(request);
     }
 
     private handleAuthErrors(request: HttpRequest<any>, next: HttpHandler) {
@@ -44,6 +47,7 @@ export class TokenInterceptor implements HttpInterceptor {
             )
         }
     }
+
     private addToken(request: HttpRequest<any>, jwtToken: string) {
         return request.clone({
             headers: request.headers.set('Authorization', 'Bearer ' + jwtToken)
