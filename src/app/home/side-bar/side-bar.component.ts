@@ -12,8 +12,4 @@ export class SideBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  goToCreatePost() {}
-
-  goToCreateSubreddit() {}
-
 }

@@ -1,0 +1,51 @@
+<div class="container mt-100">
+    <div class="row w-100">
+        <div class="col-lg-9">
+            <div class="create-subreddit-container">
+            <form class="post-form" [formGroup]="createSubredditForm" (ngSubmit)="onSubmit()">
+                <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+                    {{ errorMessage }}
+                </div>
+                <div class="form-group">
+                    <div class="create-subreddit-heading">Create Subreddit</div>
+                    <hr />
+                    <div class="form-group">
+                        <input type="text" class="form-control mt-2" placeholder="title" formControlName="name" [ngClass]="{'is-invalid': formErrors.name}">
+                        <div class="invalid-feedback">
+                            {{ formErrors.name }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea type="text" class="form-control mt-2" placeholder="Description" formControlName="description" 
+                        [ngClass]="{'is-invalid': formErrors.description}"></textarea>
+                        <div class="invalid-feedback">
+                            {{ formErrors.description }}
+                        </div>
+                    </div>
+                    
+                    <div>
+                    <div class="mt-3  w-100">
+                        <button type="submit" class="btnCreateSubreddit float-right">Create</button>
+                        <button (click)="discard()" class="btnDiscard float-right">Discard</button>
+                    </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="sidebar">
+            <h5 class="guidelines">Posting to Spring Reddit</h5>
+            <hr/>
+            <ul class="px-0">
+                <li class="px-2">Remember the human</li>
+                <hr/>
+                <li class="px-2">Behave like you would in real life</li>
+                <hr/>
+                <li class="px-2">Don't spam</li>
+                <hr/>
+            </ul>
+            </div>
+        </div>
+    </div>
+</div>

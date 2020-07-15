@@ -22,6 +22,8 @@ import { ErrorResponseService } from './services/error-response.service';
 import { AuthService } from './services/auth.service';
 import { PostService } from './services/post.service';
 import { SubredditService } from './services/subreddit.service';
+import { CreateSubredditComponent } from './subreddit/create-subreddit/create-subreddit.component';
+import { CreatePostComponent } from './post/create-post/create-post.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { SubredditService } from './services/subreddit.service';
     PostTitleComponent,
     SideBarComponent,
     SubredditSideBarComponent,
-    VoteButtonComponent
+    VoteButtonComponent,
+    CreateSubredditComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,
