@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BaseURL } from './base-URL';
-import { Post } from '../shared/post';
+import { Post, PostRequest } from '../shared/post';
+import { catchError } from 'rxjs/operators';
+import { ErrorResponseService } from './error-response.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +13,18 @@ export class PostService {
 
   private BASEURL: string;
 
-  constructor(private baseURL: BaseURL, private http: HttpClient) {
+  constructor(private baseURL: BaseURL, private errorResponseService: ErrorResponseService,
+    private http: HttpClient) {
     this.BASEURL = baseURL.getBaseURL() + 'post';
   }
 
   getAllPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.BASEURL);
+  }
+
+  createPost(post: PostRequest): Observable<any> {
+    return this.http.post(this.BASEURL, post)
+      .pipe(catchError(this.errorResponseService.handleError));
   }
 
 }

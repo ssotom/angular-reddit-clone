@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { EditorModule } from '@tinymce/tinymce-angular';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SignupComponent } from './auth/signup/signup.component';
@@ -47,7 +48,8 @@ import { ListSubredditsComponent } from './subreddit/list-subreddits/list-subred
     ReactiveFormsModule,
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
-    FontAwesomeModule
+    FontAwesomeModule,
+    EditorModule
   ],
   providers: [
     {

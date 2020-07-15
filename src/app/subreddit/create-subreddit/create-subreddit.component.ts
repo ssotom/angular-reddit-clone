@@ -52,7 +52,7 @@ export class CreateSubredditComponent implements OnInit {
     if(this.createSubredditForm.valid) {
       this.subrredit = this.createSubredditForm.value;
       this.SubredditService.createSubreddit(this.subrredit).subscribe(
-        () => this.router.navigate(['/'])
+        () => this.router.navigate(['/list-subreddits'])
       , error => this.errorMessage = error);
     } else {
       this.onValueChanged(true);

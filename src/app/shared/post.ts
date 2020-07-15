@@ -9,3 +9,12 @@ export class Post {
     commentCount: number;
     duration: string;
 }
+
+export class PostRequest {
+    id: number;
+    name: string;
+    subredditId: number;
+    url: string;
+    description: string;
+
+}
