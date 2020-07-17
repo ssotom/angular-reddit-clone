@@ -1,0 +1,30 @@
+<div class="container mt-100">
+    <div class="row" *ngIf="post">
+        <hr/>
+        <div class="col-lg-9">
+            <div class="row post w-100">
+                <div class="col-sm-1 px-0">
+                    <app-vote-button [post]="post"></app-vote-button>
+                </div>
+                <div class="col-sm-11">
+                    <span>
+                    <span class="font-weight-bold"><a href="">{{post.subredditName}}</a></span>
+                    <span>. Posted <span> {{post.duration}} </span>by
+                        <a *ngIf="post.username === null" class="username" href="">Anonymous</a>
+                        <a *ngIf="post.username != null" class="username" href="">{{post.username}}</a>
+                    </span>                        
+                    </span>
+                    <hr/>
+                    <a routerLink="post.url" class="post-title">{{post.postName}}</a>
+                    <div>
+                        <p class="mt-3" [innerHtml]="post.description"></p>
+                    </div>
+                </div>   
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <app-side-bar></app-side-bar>
+            <app-subreddit-side-bar></app-subreddit-side-bar>
+        </div>
+    </div>
+</div>

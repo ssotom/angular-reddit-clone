@@ -22,6 +22,10 @@ export class PostService {
     return this.http.get<Post[]>(this.BASEURL);
   }
 
+  getPost(id: number): Observable<Post> {
+    return this.http.get<Post>(this.BASEURL + '/' + id);
+  }
+
   createPost(post: PostRequest): Observable<any> {
     return this.http.post(this.BASEURL, post)
       .pipe(catchError(this.errorResponseService.handleError));
