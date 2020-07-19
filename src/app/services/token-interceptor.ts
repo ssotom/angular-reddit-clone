@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError, switchMap, take, filter } from 'rxjs/operators';
 import { LoginResponse } from '../shared/login';
 
 @Injectable({
@@ -15,25 +15,26 @@ export class TokenInterceptor implements HttpInterceptor {
 
     constructor(public authService: AuthService) { }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (request.url.indexOf('refresh') !== -1 || request.url.indexOf('login') !== -1) {
-            return next.handle(request);
+    intercept(req: HttpRequest<any>, next: HttpHandler):
+        Observable<HttpEvent<any>> {
+
+        if (req.url.indexOf('refresh') !== -1 || req.url.indexOf('login') !== -1) {
+            return next.handle(req);
         }
         const jwtToken = this.authService.getJwtToken();
 
-        if (jwtToken) {
-            return next.handle(this.addToken(request, jwtToken)).pipe(catchError(error => {
-                if (error instanceof HttpErrorResponse && error.status === 403) {
-                    return this.handleAuthErrors(request, next);
-                } else {
-                    return throwError(error);
-                }
-            }));
-        }
-        return next.handle(request);
+        return next.handle(this.addToken(req, jwtToken)).pipe(catchError(error => {
+            if (error instanceof HttpErrorResponse
+                && error.status === 403) {
+                return this.handleAuthErrors(req, next);
+            } else {
+                return throwError(error);
+            }
+        }));
     }
 
-    private handleAuthErrors(request: HttpRequest<any>, next: HttpHandler) {
+    private handleAuthErrors(req: HttpRequest<any>, next: HttpHandler)
+        : Observable<HttpEvent<any>> {
         if (!this.isTokenRefreshing) {
             this.isTokenRefreshing = true;
             this.refreshTokenSubject.next(null);
@@ -41,17 +42,26 @@ export class TokenInterceptor implements HttpInterceptor {
             return this.authService.refreshToken().pipe(
                 switchMap((refreshTokenResponse: LoginResponse) => {
                     this.isTokenRefreshing = false;
-                    this.refreshTokenSubject.next(refreshTokenResponse.token);
-                    return next.handle(this.addToken(request, refreshTokenResponse.token));
+                    this.refreshTokenSubject
+                        .next(refreshTokenResponse.token);
+                    return next.handle(this.addToken(req,
+                        refreshTokenResponse.token));
                 })
             )
+        } else {
+            return this.refreshTokenSubject.pipe(
+                filter(result => result !== null),
+                take(1),
+                switchMap((res) => {
+                    return next.handle(this.addToken(req,
+                        this.authService.getJwtToken()))
+                })
+            );
         }
     }
 
-    private addToken(request: HttpRequest<any>, jwtToken: string) {
-        return request.clone({
-            headers: request.headers.set('Authorization', 'Bearer ' + jwtToken)
-        });
+    addToken(req: HttpRequest<any>, jwtToken: any) {
+        return req.clone({headers: req.headers.set('Authorization', 'Bearer ' + jwtToken)});
     }
 
 }

@@ -16,6 +16,10 @@ import { PostTitleComponent } from './home/post-title/post-title.component';
 import { SideBarComponent } from './home/side-bar/side-bar.component';
 import { SubredditSideBarComponent } from './home/subreddit-side-bar/subreddit-side-bar.component';
 import { VoteButtonComponent } from './home/vote-button/vote-button.component';
+import { CreateSubredditComponent } from './subreddit/create-subreddit/create-subreddit.component';
+import { CreatePostComponent } from './post/create-post/create-post.component';
+import { ListSubredditsComponent } from './subreddit/list-subreddits/list-subreddits.component';
+import { ViewPostComponent } from './post/view-post/view-post.component';
 
 import { TokenInterceptor } from './services/token-interceptor';
 import { BaseURL } from './services/base-URL';
@@ -23,10 +27,8 @@ import { ErrorResponseService } from './services/error-response.service';
 import { AuthService } from './services/auth.service';
 import { PostService } from './services/post.service';
 import { SubredditService } from './services/subreddit.service';
-import { CreateSubredditComponent } from './subreddit/create-subreddit/create-subreddit.component';
-import { CreatePostComponent } from './post/create-post/create-post.component';
-import { ListSubredditsComponent } from './subreddit/list-subreddits/list-subreddits.component';
-import { ViewPostComponent } from './post/view-post/view-post.component';
+import { CommentService } from './services/comment.service';
+
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import { ViewPostComponent } from './post/view-post/view-post.component';
     ErrorResponseService,
     AuthService,
     PostService,
-    SubredditService
+    SubredditService,
+    CommentService
   ],
   bootstrap: [AppComponent]
 })
