@@ -50,6 +50,10 @@ export class AuthService {
       }));
   }
 
+  isLoggedIn(): boolean {
+    return this.getJwtToken() != null;
+  }
+
   getJwtToken() {
     return this.localStorage.retrieve('token');
   }
