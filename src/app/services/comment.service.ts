@@ -22,6 +22,10 @@ export class CommentService {
     return this.http.get<Comment[]>(this.BASEURL + '/by-post/' + postId);
   }
 
+  getAllCommentsByUser(username: string): Observable<Comment[]> {
+    return this.http.get<Comment[]>(this.BASEURL + '/by-user/' + username);
+  }
+
   postComment(comment: Comment): Observable<any> {
     return this.http.post(this.BASEURL, comment)
       .pipe(catchError(this.errorResponseService.handleError));

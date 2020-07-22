@@ -26,6 +26,10 @@ export class PostService {
     return this.http.get<Post>(this.BASEURL + '/' + id);
   }
 
+  getAllPostsByUser(username: string): Observable<Post[]> {
+    return this.http.get<Post[]>(this.BASEURL + '/by-user/' + username);
+  }
+
   createPost(post: PostRequest): Observable<any> {
     return this.http.post(this.BASEURL, post)
       .pipe(catchError(this.errorResponseService.handleError));

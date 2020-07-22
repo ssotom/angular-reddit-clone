@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -12,6 +12,8 @@ import { LoginRequest, LoginResponse } from '../shared/login';
   providedIn: 'root'
 })
 export class AuthService {
+
+  @Output() getIsLoggedIn: EventEmitter<any> = new EventEmitter();
 
   private BASEURL: string;
 
@@ -29,6 +31,7 @@ export class AuthService {
     return this.http.post<LoginResponse>(this.BASEURL + '/login', loginRequest)
       .pipe(
         map(response => {
+          this.getIsLoggedIn.emit();
           this.localStorage.store('token', response.token);
           this.localStorage.store('username', response.username);
           this.localStorage.store('refreshToken', response.refreshToken);

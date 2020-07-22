@@ -29,6 +29,7 @@ import { AuthService } from './services/auth.service';
 import { PostService } from './services/post.service';
 import { SubredditService } from './services/subreddit.service';
 import { CommentService } from './services/comment.service';
+import { UserProfileComponent } from './auth/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { CommentService } from './services/comment.service';
     CreateSubredditComponent,
     CreatePostComponent,
     ListSubredditsComponent,
-    ViewPostComponent
+    ViewPostComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
