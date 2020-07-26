@@ -36,4 +36,5 @@ export class HeaderComponent implements OnInit {
       window.location.reload();
     })
   }
+  
 }
