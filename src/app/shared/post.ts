@@ -8,6 +8,8 @@ export class Post {
     voteCount: number;
     commentCount: number;
     duration: string;
+    upVote: boolean;
+    downVote: boolean;
 }
 
 export class PostRequest {

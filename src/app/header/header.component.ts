@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
+    this.updateData();
     this.authService.getIsLoggedIn.subscribe(() => this.updateData());
     
   }

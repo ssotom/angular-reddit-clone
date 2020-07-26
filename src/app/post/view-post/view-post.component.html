@@ -15,7 +15,7 @@
                     </span>                        
                     </span>
                     <hr/>
-                    <a routerLink="post.url" class="post-title">{{post.postName}}</a>
+                    <a routerLink="" class="post-title text-dark">{{post.postName}}</a>
                     <div>
                         <p class="mt-3" [innerHtml]="post.description"></p>
                     </div>
@@ -33,11 +33,11 @@
                     <div style="margin-top: 60px;"></div>
                     <div class="mt-1" *ngFor="let comment of comments">
                         <div class="comment">
-                            <div class="username">
-                                <a routerLink="/user/comment.username">{{comment.username}}</a>
-                            </div>
-                            <div>
+                            <div class="float-right">
                                 <p>{{comment.duration}}</p>
+                            </div>
+                            <div class="username mb-1">
+                                <a routerLink="/user/comment.username">{{comment.username}}</a>
                             </div>
                             {{comment.text}}
                         </div>

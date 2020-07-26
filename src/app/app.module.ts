@@ -20,6 +20,8 @@ import { VoteButtonComponent } from './home/vote-button/vote-button.component';
 import { CreateSubredditComponent } from './subreddit/create-subreddit/create-subreddit.component';
 import { CreatePostComponent } from './post/create-post/create-post.component';
 import { ListSubredditsComponent } from './subreddit/list-subreddits/list-subreddits.component';
+import { CommentService } from './services/comment.service';
+import { UserProfileComponent } from './auth/user-profile/user-profile.component';
 import { ViewPostComponent } from './post/view-post/view-post.component';
 
 import { TokenInterceptor } from './services/token-interceptor';
@@ -28,9 +30,7 @@ import { ErrorResponseService } from './services/error-response.service';
 import { AuthService } from './services/auth.service';
 import { PostService } from './services/post.service';
 import { SubredditService } from './services/subreddit.service';
-import { CommentService } from './services/comment.service';
-import { UserProfileComponent } from './auth/user-profile/user-profile.component';
-
+import { VoteService } from './services/vote.service';
 
 @NgModule({
   declarations: [
@@ -70,7 +70,8 @@ import { UserProfileComponent } from './auth/user-profile/user-profile.component
     AuthService,
     PostService,
     SubredditService,
-    CommentService
+    CommentService,
+    VoteService
   ],
   bootstrap: [AppComponent]
 })
