@@ -19,7 +19,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.updateData();
     this.authService.getIsLoggedIn.subscribe(() => this.updateData());
-    
   }
 
   updateData() {
@@ -31,4 +30,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/user-profile/' + this.username);
   }
 
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl('').then(() => {
+      window.location.reload();
+    })
+  }
 }

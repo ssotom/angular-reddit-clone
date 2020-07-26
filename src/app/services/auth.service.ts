@@ -31,11 +31,11 @@ export class AuthService {
     return this.http.post<LoginResponse>(this.BASEURL + '/login', loginRequest)
       .pipe(
         map(response => {
-          this.getIsLoggedIn.emit();
           this.localStorage.store('token', response.token);
           this.localStorage.store('username', response.username);
           this.localStorage.store('refreshToken', response.refreshToken);
           this.localStorage.store('expiresAt', response.expiresAt);
+          this.getIsLoggedIn.emit();
           return true;
         })
       )
@@ -51,6 +51,15 @@ export class AuthService {
         this.localStorage.store('token', response.token);
         this.localStorage.store('expiresAt', response.expiresAt);
       }));
+  }
+
+  logout() {
+    this.http.post(this.BASEURL + '/logout', this.refreshToken)
+    .pipe(catchError(this.errorResponseService.handleError));
+
+    this.localStorage.clear();
+
+    this.getIsLoggedIn.emit();
   }
 
   isLoggedIn(): boolean {
