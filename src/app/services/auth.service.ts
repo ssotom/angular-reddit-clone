@@ -42,6 +42,11 @@ export class AuthService {
       .pipe(catchError(this.errorResponseService.handleError));
   }
 
+  accountVerification(token: string): Observable<any> {
+    return this.http.get(this.BASEURL + '/account-verification/' + token)
+    .pipe(catchError(this.errorResponseService.handleError));
+  }
+
   refreshToken() {
     const refreshToken = {
       refreshToken: this.getRefreshToken(),

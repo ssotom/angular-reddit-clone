@@ -9,6 +9,7 @@ import { CreatePostComponent } from './post/create-post/create-post.component';
 import { CreateSubredditComponent } from './subreddit/create-subreddit/create-subreddit.component';
 import { ListSubredditsComponent } from './subreddit/list-subreddits/list-subreddits.component';
 import { UserProfileComponent } from './auth/user-profile/user-profile.component';
+import { AccountVerificationComponent } from './auth/account-verification/account-verification.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'view-post/:id', component: ViewPostComponent },
   { path: 'create-post', component: CreatePostComponent, canActivate: [AuthGuard] },
   { path: 'create-subreddit', component: CreateSubredditComponent, canActivate: [AuthGuard] },
+  { path: 'account-verification/:token', component: AccountVerificationComponent},
   { path: 'user-profile/:username', component: UserProfileComponent, canActivate: [AuthGuard]},
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent }

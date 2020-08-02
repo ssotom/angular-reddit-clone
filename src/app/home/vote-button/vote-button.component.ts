@@ -30,7 +30,6 @@ export class VoteButtonComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateVoteDetails();
-    console.log(this.post);
     
   }
 

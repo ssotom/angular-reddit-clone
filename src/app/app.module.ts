@@ -23,6 +23,7 @@ import { ListSubredditsComponent } from './subreddit/list-subreddits/list-subred
 import { CommentService } from './services/comment.service';
 import { UserProfileComponent } from './auth/user-profile/user-profile.component';
 import { ViewPostComponent } from './post/view-post/view-post.component';
+import { AccountVerificationComponent } from './auth/account-verification/account-verification.component';
 
 import { TokenInterceptor } from './services/token-interceptor';
 import { BaseURL } from './services/base-URL';
@@ -47,7 +48,8 @@ import { VoteService } from './services/vote.service';
     CreatePostComponent,
     ListSubredditsComponent,
     ViewPostComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    AccountVerificationComponent
   ],
   imports: [
     BrowserModule,
