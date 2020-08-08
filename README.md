@@ -1,27 +1,38 @@
-# AngularRedditClone
+# Angular Reddi Clone
+Reddit clone is built  Angular.
+The backend is built using Spring Boot, Spring Security with JWT Authentication, Spring Data JPA with PostgreSQL. You can find the backend source code here - https://github.com/ssotom/spring-reddit-clone
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.2.
+This application was developed based on the tutorials series of [Programming Techie](https://www.youtube.com/channel/UCD20RZV_WHQImisCW2QZwDw)
 
-## Development server
+Please visit his web sites:
+- [Youtube](https://www.youtube.com/channel/UCD20RZV_WHQImisCW2QZwDw)
+- [Github](https://github.com/SaiUpadhyayula)
+- [Blog](https://programmingtechie.com/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Demo
+https://ssotom.github.io/angular-reddit-clone/
 
-## Code scaffolding
+## API Documentation
+https://ssotom-reddit-clone.herokuapp.com/swagger-ui.html
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Screenshots
+1. Home Page
 
-## Build
+![Home Page](https://raw.githubusercontent.com/ssotom/spring-reddit-clone/master/src/main/resources/images/reddit-screenshot-updated.PNG)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+2. View Post Page
 
-## Running unit tests
+![View Post Page](https://raw.githubusercontent.com/ssotom/spring-reddit-clone/master/src/main/resources/images/reddit-screenshot-updated.PNG)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+3. Create Post Page
 
-## Running end-to-end tests
+![Create Post Page](https://raw.githubusercontent.com/ssotom/spring-reddit-clone/master/src/main/resources/images/create-post.PNG)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+4. Create Subreddit Page
 
-## Further help
+![Create Subreddit Page](https://raw.githubusercontent.com/ssotom/spring-reddit-clone/master/src/main/resources/images/create-subreddit.PNG)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+5. User Profile Page
+
+![User Profile Page](https://raw.githubusercontent.com/ssotom/spring-reddit-clone/master/src/main/resources/images/user-profile.PNG)
+ 
